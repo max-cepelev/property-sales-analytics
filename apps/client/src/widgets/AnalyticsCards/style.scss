@@ -1,0 +1,163 @@
+.cardsWrapper {
+  display: grid;
+  gap: clamp(10px, 1vw, 25px);
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  margin-top: 15px;
+}
+.infoCard {
+  margin-bottom: 12px;
+  opacity: 1;
+  background: transparent;
+  color: rgb(52, 71, 103);
+  box-shadow: none;
+  width: 100%;
+  min-height: 136px;
+  &__wrapper {
+    color: rgba(0, 0, 0, 0.87);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-width: 0px;
+    overflow-wrap: break-word;
+    background-color: rgb(255, 255, 255);
+    background-clip: border-box;
+    border: 0px solid rgba(0, 0, 0, 0.125);
+    border-radius: 3px;
+    box-shadow: rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem,
+      rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem;
+    overflow: visible;
+    height: 100%;
+  }
+  &__topContent {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding-top: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    opacity: 1;
+    gap: 10px;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    box-shadow: none;
+    height: 100%;
+    &-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: right;
+      opacity: 1;
+      background: transparent;
+      color: rgb(52, 71, 103);
+      box-shadow: none;
+      span {
+        margin: 0px;
+        font-family: Roboto, Helvetica, Arial, sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        letter-spacing: 0.02857em;
+        opacity: 1;
+        text-transform: none;
+        vertical-align: unset;
+        text-decoration: none;
+        color: rgb(123, 128, 154);
+        font-weight: 300;
+      }
+      h4 {
+        margin: 0px;
+        font-size: clamp(12px, 1.5vw, 20px);
+        line-height: 1.375;
+        font-family: Roboto, Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.00735em;
+        opacity: 1;
+        text-transform: none;
+        vertical-align: unset;
+        text-decoration: none;
+        color: rgb(52, 71, 103);
+        white-space: nowrap;
+      }
+    }
+  }
+  &__icon {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    margin-top: -20px;
+    opacity: 1;
+    // background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+    color: rgb(255, 255, 255);
+    border-radius: 3px;
+    box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem,
+      rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+    span {
+      user-select: none;
+      width: 1em;
+      height: 1em;
+      overflow: hidden;
+      display: inline-block;
+      text-align: center;
+      flex-shrink: 0;
+      font-size: 1.5rem;
+    }
+  }
+  &__divider {
+    flex-shrink: 0;
+    border-top: 0px solid rgba(0, 0, 0, 0.12);
+    border-right: 0px solid rgba(0, 0, 0, 0.12);
+    border-left: 0px solid rgba(0, 0, 0, 0.12);
+    background-color: transparent;
+    height: 0.0625rem;
+    margin: clamp(5px, 1vw, 18px) 0px;
+    border-bottom: none;
+    opacity: 0.25;
+    background-image: linear-gradient(
+      to right,
+      rgba(52, 71, 103, 0),
+      rgba(52, 71, 103, 0.4),
+      rgba(52, 71, 103, 0)
+    ) !important;
+  }
+  &__bottomContent {
+    padding-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    opacity: 1;
+    background: transparent;
+    color: rgb(52, 71, 103);
+    box-shadow: none;
+    &-text {
+      margin: 0px;
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+      font-size: 0.875rem;
+      font-weight: 300;
+      line-height: 1.5;
+      letter-spacing: 0.02857em;
+      display: flex;
+      gap: 10px;
+      opacity: 1;
+      text-transform: none;
+      vertical-align: unset;
+      text-decoration: none;
+      color: rgb(123, 128, 154);
+      span {
+        margin: 0px;
+        font-family: Roboto, Helvetica, Arial, sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        letter-spacing: 0.02857em;
+        opacity: 1;
+        text-transform: none;
+        vertical-align: unset;
+        text-decoration: none;
+        font-weight: 700;
+      }
+    }
+  }
+}

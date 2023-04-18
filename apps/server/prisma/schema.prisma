@@ -1,0 +1,263 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "binary"
+}
+
+generator pothos {
+  provider     = "prisma-pothos-types"
+  clientOutput = "@prisma/client"
+  output       = "../src/types/pothos-types.ts"
+}
+
+model Region {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  cities City[]
+  groups Group[]
+
+  @@map("regions")
+}
+
+model City {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  regionId  Int
+  region    Region     @relation(fields: [regionId], references: [id])
+  districts District[]
+  complexes Complex[]
+  buildings Building[]
+
+  @@map("cities")
+}
+
+model District {
+  id        Int        @id @default(autoincrement())
+  name      String
+  city      City       @relation(fields: [cityId], references: [id])
+  cityId    Int
+  complexes Complex[]
+  buildings Building[]
+
+  @@map("districts")
+}
+
+model Group {
+  id         Int         @id @default(autoincrement())
+  name       String      @unique
+  regions    Region[]
+  buildings  Building[]
+  developers Developer[]
+  complexes  Complex[]
+
+  @@map("groups")
+}
+
+model Developer {
+  id            Int        @id @default(autoincrement())
+  name          String     @unique
+  fullName      String
+  legalAddress  String?
+  actualAddress String?
+  inn           String     @unique
+  kpp           String?
+  ogrn          String?
+  manager       String?
+  website       String?
+  phone         String?
+  email         String?
+  info          String?
+  group         Group      @relation(fields: [groupId], references: [id])
+  groupId       Int
+  buildings     Building[]
+
+  @@map("developers")
+}
+
+model Complex {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  shortName  String?
+  website    String?
+  info       String?
+  domRfId    Int?
+  domClickId Int?
+  group      Group      @relation(fields: [groupId], references: [id])
+  groupId    Int
+  city       City       @relation(fields: [cityId], references: [id])
+  cityId     Int
+  district   District   @relation(fields: [districtId], references: [id])
+  districtId Int
+  buildings  Building[]
+
+  @@map("complexes")
+}
+
+model Building {
+  id             Int            @id @default(autoincrement())
+  name           String         @unique
+  address        String
+  completionDate DateTime
+  completed      Boolean        @default(false)
+  latitude       Float?
+  longitude      Float?
+  propertyClass  PropertyClass?
+  decorType      DecorType?
+  wallMaterial   WallMaterial?
+  img            String?
+  domRfId        Int?
+  domClickId     Int?
+  city           City           @relation(fields: [cityId], references: [id])
+  cityId         Int
+  district       District       @relation(fields: [districtId], references: [id])
+  districtId     Int
+  developer      Developer      @relation(fields: [developerId], references: [id])
+  developerId    Int
+  group          Group          @relation(fields: [groupId], references: [id])
+  groupId        Int
+  complex        Complex        @relation(fields: [complexId], references: [id])
+  complexId      Int
+  sales          Sale[]
+  properties     Property[]
+
+  @@map("buildings")
+}
+
+model Property {
+  id           Int          @id @default(autoincrement())
+  number       String?
+  floor        Int
+  entrance     Int?
+  totalArea    Float
+  livingArea   Float?
+  rooms        Int?
+  wallHeight   Float?
+  propertyType PropertyType
+  building     Building     @relation(fields: [buildingId], references: [id])
+  buildingId   Int
+
+  @@map("properties")
+}
+
+model Sale {
+  id           Int          @id @default(autoincrement())
+  month        Int
+  year         Int
+  amount       Int
+  area         Float
+  sum          Float
+  propertyType PropertyType
+  building     Building     @relation(fields: [buildingId], references: [id])
+  buildingId   Int
+
+  @@map("sales")
+}
+
+model Offer {
+  id          Int      @id @default(autoincrement())
+  floor       Int?
+  floors      Int?
+  price       Float?
+  address     String?
+  buildingId  Int?
+  building    String?
+  developer   String?
+  developerId Int?
+  complex     String?
+  complexId   Int?
+  area        Float?
+  rooms       Int?
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("offers")
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  operation String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+
+  @@map("logs")
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  name           String?
+  phone          String?
+  password       String
+  activationLink String?
+  activated      Boolean? @default(false)
+  role           Role     @default(USER)
+  logs           Log[]
+  favoriteIds    Int[]    @default([])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Lead {
+  id           Int     @id @default(autoincrement())
+  uniq_id      String?
+  host         String?
+  name         String?
+  phone        String?
+  email        String?
+  form_name    String?
+  form_id      String?
+  tran_id      String?
+  utm_source   String?
+  utm_medium   String?
+  utm_campaign String?
+  utm_term     String?
+
+  @@map("leads")
+}
+
+enum Role {
+  USER
+  ADMIN
+  EDITOR
+}
+
+enum PropertyClass {
+  TYPICAL
+  ECONOMY
+  COMFORT
+  BUSINESS
+  PREMIUM
+}
+
+enum DecorType {
+  WITHOUT
+  UNDER_FINISHING
+  FINISHING
+  FULL
+  OPTIONALLY
+}
+
+enum WallMaterial {
+  MONOLITH_BRICK
+  BLOCKS
+  BRICK
+  PANEL
+  MONOLITH
+}
+
+enum PropertyType {
+  LIVING
+  COMMERCIAL
+  PARKING
+}

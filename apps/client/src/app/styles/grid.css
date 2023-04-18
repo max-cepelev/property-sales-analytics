@@ -1,0 +1,92 @@
+* {
+  --dsg-border-color: #00000042;
+  --dsg-selection-border-color: #2e87eb;
+  --dsg-header-text-color: rgba(0, 0, 0, 0.7);
+  --dsg-cell-background-color: #ffffff;
+  /* --dsg-header-active-text-color: #325288; */
+}
+
+.dsg-cell-header-container {
+  font-family: 'Nunito';
+  font-weight: bold;
+  font-size: clamp(12px, 0.8vw, 14px);
+  padding: 0 7px;
+  text-align: center;
+  width: 100%;
+}
+
+.propertiesGrid {
+  box-shadow: rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem,
+    rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem;
+  /* border-radius: 0.75rem; */
+}
+
+/* .dsg-add-row {
+  border: none;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+} */
+
+/* .dsg-cell-header {
+  border: none;
+} */
+
+/* .dsg-cell-header:last-child {
+  border-top-right-radius: 0.75rem;
+} */
+
+/* .dsg-container {
+  border: none;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+} */
+
+.dsg-add-row-input {
+  min-width: 60px;
+}
+
+.dsg-input {
+  font-size: 12px;
+  font-family: 'Nunito';
+  text-align: right;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.editing {
+  background-color: #ff980038;
+}
+.saved {
+  background-color: #cfffdc;
+}
+
+.usersGrid .cellButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MuiInputBase-root::before {
+  border-bottom: 0;
+}
+#select-standard {
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0;
+  font-size: 12px;
+  padding-left: 5px;
+}
+
+#select-standard::before {
+  border-bottom: 0;
+}
+
+.MuiFormControl-root {
+  border-radius: 0;
+  border-width: 0;
+}
+
+.MuiInputBase-inputAdornedEnd {
+  font-size: 12px;
+}

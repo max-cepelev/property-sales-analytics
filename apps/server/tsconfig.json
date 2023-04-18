@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "strict": true,
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
+    "sourceMap": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "allowJs": true,
+    "strictPropertyInitialization": false
+  },
+  "include": ["src/**/*", "src/public/*.html",],
+}
