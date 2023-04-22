@@ -90,7 +90,7 @@ export default function BuildingView({ building, onEdit, propAggregate }: Props)
         </TextWrapper>
         <TextWrapper>
           <h4>Жилая площадь, м²</h4>
-          <span>{propAggregate?.living?.maxArea}</span>
+          <span>{propAggregate?.living?.totalArea}</span>
         </TextWrapper>
         <TextWrapper>
           <h4>Количество квартир</h4>

@@ -22,7 +22,9 @@ export const transformMacroData = (data: IMacroData[]): MacroResponse => {
         status: getStatusName(item.status),
         square: Number(item.estate_area),
         price: Number(item.estate_price),
-        stockPrice: Number(item.estate_price_action),
+        stockPrice: item.estate_price_action
+          ? Number(item.estate_price_action)
+          : null,
         decorPrice: null,
         mPrice: Number(item.estate_price_m2),
         floor: item.estate_floor,

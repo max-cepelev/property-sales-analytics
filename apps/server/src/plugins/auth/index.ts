@@ -125,7 +125,7 @@ export const authPlugin = plugin(async function (
     },
   );
 
-  app.get(
+  app.withTypeProvider<ZodTypeProvider>().get(
     '/auth/refresh',
     {
       schema: {
@@ -143,7 +143,7 @@ export const authPlugin = plugin(async function (
       reply,
     ) => {
       const refreshToken = request.cookies.refreshToken;
-      app.log.warn({ refreshToken });
+
       if (!refreshToken) {
         reply.status(401).send({ message: 'Unauthorized' });
         return;
