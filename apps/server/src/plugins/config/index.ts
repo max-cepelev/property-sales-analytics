@@ -1,4 +1,4 @@
-import fastifyEnv from '@fastify/env';
+import { fastifyEnv, FastifyEnvOptions } from '@fastify/env';
 import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import { fastifyPlugin } from 'fastify-plugin';
 import { join } from 'node:path';
@@ -10,6 +10,7 @@ declare module 'fastify' {
       DB_URL: string;
       COOKIES_SECRET: string;
       JWT_SECRET: string;
+      IS_PROD: boolean;
     };
   }
 }
@@ -38,26 +39,26 @@ export const configPlugin = fastifyPlugin(function (
       JWT_SECRET: {
         type: 'string',
       },
+      IS_PROD: {
+        type: 'boolean',
+        default: false,
+      },
     },
   };
 
-  const configOptions = {
+  const configOptions: FastifyEnvOptions = {
     // decorate the Fastify server instance with `config` key
     // such as `fastify.config('PORT')
     confKey: 'config',
     // schema to validate
     schema: schema,
     // source for the configuration data
-    data: process.env,
+    data: { ...process.env, IS_PROD: env === 'production' },
     // will read .env in root folder
     dotenv: {
       path,
       debug: true,
     },
-    // will remove the additional properties
-    // from the data object which creates an
-    // explicit schema
-    removeAdditional: true,
   };
 
   return fastifyEnv(app, configOptions, next);

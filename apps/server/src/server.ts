@@ -37,7 +37,7 @@ export default async function createServer() {
         target: 'pino-pretty',
         options: {
           translateTime: 'SYS:dd-mm-yyyy HH:MM:ss',
-          ignore: 'pid,hostname',
+          ignore: 'pid, hostname',
         },
       },
     },
@@ -45,7 +45,6 @@ export default async function createServer() {
 
   //plugins
   await server.register(configPlugin);
-  // await server.register(httpPlugin);
   await server.register(redisPlugin);
   await server.register(corsPlugin);
   await server.register(fastifyStatic, {
