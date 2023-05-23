@@ -3,5 +3,7 @@
         "fastify",
         "pino",
         "pothos"
-    ]
+    ],
+    "editor.fontFamily": " 'JetBrains Mono',Consolas,'Martian Mono', 'Courier New', monospace",
+    "editor.fontSize": 14
 }

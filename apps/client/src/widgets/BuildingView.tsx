@@ -1,11 +1,12 @@
-import { Building, PropAggregateResponse } from '~/shared/models/gql/graphql';
-import RowWrapper from '~/shared/ui/RowWrapper';
-import { IconButton, Typography, styled, Box, Divider } from '~/shared/lib/MUI';
-import CustomImage from '~/shared/components/CustomImage';
-import { getQuarter } from '~/shared/utils/getQuarter';
-import { DecorTypes, PropertyClasses, WallMaterials } from '~/shared/constants/enums';
 import { mdiPencil } from '@mdi/js';
 import { Icon } from '@mdi/react';
+
+import CustomImage from '~/shared/components/CustomImage';
+import { DecorTypes, PropertyClasses, WallMaterials } from '~/shared/constants/enums';
+import { Box, Divider, IconButton, styled, Typography } from '~/shared/lib/MUI';
+import { Building, PropAggregateResponse } from '~/shared/models/gql/graphql';
+import RowWrapper from '~/shared/ui/RowWrapper';
+import { getQuarter } from '~/shared/utils/getQuarter';
 
 interface Props {
   building: Building;
@@ -90,7 +91,7 @@ export default function BuildingView({ building, onEdit, propAggregate }: Props)
         </TextWrapper>
         <TextWrapper>
           <h4>Жилая площадь, м²</h4>
-          <span>{propAggregate?.living?.totalArea}</span>
+          <span>{propAggregate?.living?.totalArea.toFixed(2) || 0}</span>
         </TextWrapper>
         <TextWrapper>
           <h4>Количество квартир</h4>

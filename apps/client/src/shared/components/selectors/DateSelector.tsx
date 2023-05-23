@@ -1,7 +1,8 @@
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateView, LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
+
+import { DatePicker, DateView, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
 
 export interface DateSelectorProps {
   onChange: (e: Date | null) => void;
@@ -28,14 +29,17 @@ export default function DateSelector({
   size = 'medium',
   openTo,
 }: DateSelectorProps) {
-  const dateValue = dayjs(value);
+  const handleDateChange = (e: dayjs.Dayjs) => {
+    console.log(e.format('YYYY-MM-DD'));
+    onChange(e.isValid() ? e.toDate() : null);
+  };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='ru'>
       <DatePicker
-        onChange={onChange}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        value={dateValue}
+        /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+        // @ts-ignore
+        onChange={handleDateChange}
+        value={dayjs(value)}
         label={label}
         disabled={disabled}
         views={views}
@@ -48,11 +52,7 @@ export default function DateSelector({
             size,
           },
         }}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
         minDate={dayjs('2020-01-01')}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
         maxDate={dayjs('2035-01-01')}
       />
     </LocalizationProvider>

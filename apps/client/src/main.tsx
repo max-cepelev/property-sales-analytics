@@ -1,17 +1,19 @@
+import 'react-datasheet-grid/dist/style.css';
+import './index.css';
+
+import { ApolloProvider } from '@apollo/client';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ApolloProvider } from '@apollo/client';
+import { ErrorBoundary } from 'react-error-boundary';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { SnackbarProvider } from 'notistack';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import 'react-datasheet-grid/dist/style.css';
 
-import './index.css';
+import { routes } from '~/app/router';
+
 import theme from './app/theme';
 import client from './shared/api/apollo';
-import { routes } from '~/app/router';
-import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from './shared/components/ErrorFallback';
 
 const router = createBrowserRouter(routes);

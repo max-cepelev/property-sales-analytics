@@ -1,8 +1,8 @@
-import React from 'react';
 import {
   mdiAccountGroup,
   mdiCity,
   mdiCrane,
+  mdiDatabaseSearch,
   mdiDomain,
   mdiHome,
   mdiHomeAnalytics,
@@ -12,15 +12,18 @@ import {
   mdiMapMarkerMultiple,
   mdiViewDashboard,
 } from '@mdi/js';
+import React from 'react';
 import { RouteObject } from 'react-router-dom';
 
-import App from '../App';
-import ProtectedRoute from '~/shared/components/ProtectedRoute';
 import Dashboard from '~/pages/Dashboard';
 import ErrorPage from '~/pages/ErrorPage';
 import LoginPage from '~/pages/LoginPage';
 import NoAccess from '~/pages/NoAccess';
 import NoActivate from '~/pages/NoActivate';
+import { SalesCheckPage } from '~/pages/SalesCheckPage';
+import ProtectedRoute from '~/shared/components/ProtectedRoute';
+
+import App from '../App';
 
 const CitiesPage = React.lazy(() => import('~/pages/CitiesPage'));
 const BuildingsPage = React.lazy(() => import('~/pages/BuildingsPage'));
@@ -164,7 +167,19 @@ export const routes: RouteObject[] = [
           roles: ['ADMIN', 'EDITOR'],
         },
       },
-
+      {
+        path: 'check',
+        element: (
+          <ProtectedRoute accessRoles={['ADMIN', 'EDITOR']}>
+            <SalesCheckPage />
+          </ProtectedRoute>
+        ),
+        handle: {
+          title: 'Проверка',
+          icon: mdiDatabaseSearch,
+          roles: ['ADMIN', 'EDITOR'],
+        },
+      },
       {
         path: 'users',
         element: (

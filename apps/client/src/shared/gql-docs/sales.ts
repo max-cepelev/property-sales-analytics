@@ -1,6 +1,7 @@
 import { gql, TypedDocumentNode } from '@apollo/client';
+
 import {
-  SalesSumByPropertyType,
+  BuildingWithoutSales,
   PropAggregateResponse,
   PropertyClass,
   PropertyType,
@@ -8,6 +9,7 @@ import {
   SaleInput,
   SalesAnalyticsResponse,
   SalesDataResponse,
+  SalesSumByPropertyType,
 } from '~/shared/models/gql/graphql';
 
 export const SAVE_SALES: TypedDocumentNode<
@@ -178,6 +180,26 @@ export const SALES_ANALYTICS: TypedDocumentNode<
         amount
         sum
       }
+    }
+  }
+`;
+
+export const BUILDINGS_WITHOUT_SALES: TypedDocumentNode<
+  {
+    buildingsWithoutSales: BuildingWithoutSales[];
+  },
+  {
+    date: string;
+  }
+> = gql`
+  query getBuildingsWithoutSales($date: String!) {
+    buildingsWithoutSales(date: $date) {
+      id
+      name
+      completionDate
+      domRfId
+      domClickId
+      tags
     }
   }
 `;

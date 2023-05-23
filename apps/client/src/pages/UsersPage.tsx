@@ -1,13 +1,15 @@
+import { mdiCheckboxBlankOutline, mdiCheckboxMarked } from '@mdi/js';
+import { Icon } from '@mdi/react';
 import { Button, Link, Typography } from '@mui/material';
+
+import DataGrid, { GridColumn } from '~/shared/components/DataGrid';
+import { Roles } from '~/shared/constants/enums';
+import { User } from '~/shared/models/gql/graphql';
+import { StyledTableContainer, TableToolbar } from '~/shared/ui/StyledTableComponents';
+
+import useUsersService from '../entities/User/api/useUsersService';
 import BackdropLoading from '../shared/ui/BackdropLoading';
 import ColumnWrapper from '../shared/ui/ColumnWrapper';
-import { StyledTableContainer, TableToolbar } from '../shared/ui/StyledTableComponents';
-import useUsersService from '../entities/User/api/useUsersService';
-import DataGrid, { GridColumn } from '~/shared/components/DataGrid';
-import { Icon } from '@mdi/react';
-import { mdiCheckboxBlankOutline, mdiCheckboxMarked } from '@mdi/js';
-import { User } from '~/shared/models/gql/graphql';
-import { Roles } from '~/shared/constants/enums';
 
 export default function Users() {
   const { users, loading, activate, deactivate } = useUsersService();

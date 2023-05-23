@@ -8,6 +8,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import axios from 'axios';
+
 import { API_URL } from '../constants/api-url';
 import { AuthResponse } from '../types/auth';
 // import { LoginResponse } from '../models/gql/graphql';
@@ -55,7 +56,7 @@ const errorLink = onError(({ networkError, operation, forward }) => {
   // instead of the onError link. This just logs the error.
   if (networkError) {
     const error = networkError as ServerError;
-    if (error?.result?.message === 'Unauthorized') {
+    if (error?.response.statusText === 'Unauthorized') {
       const oldHeaders = operation.getContext().headers;
       getNewToken().then((token) => {
         operation.setContext({

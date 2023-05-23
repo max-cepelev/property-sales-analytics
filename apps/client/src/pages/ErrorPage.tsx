@@ -1,5 +1,6 @@
-import { Typography } from '~/shared/lib/MUI';
 import { Link } from 'react-router-dom';
+
+import { Typography } from '~/shared/lib/MUI';
 import ColumnWrapper from '~/shared/ui/ColumnWrapper';
 
 export default function ErrorPage() {

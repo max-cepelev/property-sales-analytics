@@ -5,7 +5,7 @@ export const buildingInputSchema = z
     id: z.number().optional(),
     name: z.string({ required_error: 'Введите имя' }).min(2, 'Введите наименование'),
     address: z.string().min(2, 'Введите адрес'),
-    completionDate: z.string({ required_error: 'Введите срок сдачи' }).nullish(),
+    completionDate: z.date({ required_error: 'Введите срок сдачи' }).nullish(),
     completed: z.boolean(),
     latitude: z.number().nullish(),
     longitude: z.number().nullish(),

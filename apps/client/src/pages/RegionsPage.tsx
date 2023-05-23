@@ -1,16 +1,16 @@
+import { mdiPlus } from '@mdi/js';
+import { Icon } from '@mdi/react';
 import { useState } from 'react';
 
-import { IconButton, Typography } from '~/shared/lib/MUI';
+import useRegionsService from '~/entities/Region/api/useRegionsService';
 import RegionEditDialog from '~/entities/Region/components/RegionEditDialog';
+import DataGrid from '~/shared/components/DataGrid';
+import { IconButton, Typography } from '~/shared/lib/MUI';
+import { Region } from '~/shared/models/gql/graphql';
+import { useAuthStore } from '~/shared/store/useAuthStore';
 import BackdropLoading from '~/shared/ui/BackdropLoading';
 import ColumnWrapper from '~/shared/ui/ColumnWrapper';
 import { StyledTableContainer, TableToolbar } from '~/shared/ui/StyledTableComponents';
-import useRegionsService from '~/entities/Region/api/useRegionsService';
-import { useAuthStore } from '~/shared/store/useAuthStore';
-import DataGrid from '~/shared/components/DataGrid';
-import { Icon } from '@mdi/react';
-import { mdiPlus } from '@mdi/js';
-import { Region } from '~/shared/models/gql/graphql';
 
 export default function RegionsPage() {
   const { regions, create, update, remove, loading } = useRegionsService();

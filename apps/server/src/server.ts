@@ -1,37 +1,25 @@
 import { join } from 'node:path';
 import Fastify from 'fastify';
+// import { fastifyHelmet } from '@fastify/helmet';
 import { fastifyCookie } from '@fastify/cookie';
 import { fastifyStatic } from '@fastify/static';
 
 import {
-  authPlugin,
   configPlugin,
   corsPlugin,
-  graphqlPlugin,
   prismaPlugin,
   redisPlugin,
-  pothosPlugin,
   swaggerPlugin,
 } from './plugins';
-
-import {
-  buildingsModule,
-  citiesModule,
-  complexesModule,
-  developersModule,
-  districtsModule,
-  groupsModule,
-  macroModule,
-  pdfModule,
-  propertiesModule,
-  regionsModule,
-  salesModule,
-  usersModule,
-  leadsModule,
-} from './modules';
+import { authService } from './services/auth';
+import { macroService } from './services/macro';
+import { leadsService } from './services/leads';
+import { gptBotService } from './services/gpt-bot';
+import { analyticsService } from './services/analytics';
 
 export default async function createServer() {
   const server = Fastify({
+    disableRequestLogging: process.env.NODE_ENV === 'production',
     logger: {
       transport: {
         target: 'pino-pretty',
@@ -45,6 +33,7 @@ export default async function createServer() {
 
   //plugins
   await server.register(configPlugin);
+  // await server.register(fastifyHelmet, { global: true });
   await server.register(redisPlugin);
   await server.register(corsPlugin);
   await server.register(fastifyStatic, {
@@ -56,26 +45,14 @@ export default async function createServer() {
   });
   await server.register(prismaPlugin);
   await server.register(swaggerPlugin);
-  await server.register(authPlugin);
-  await server.register(pothosPlugin);
+  await server.register(authService);
 
-  //modules
-  await server.register(regionsModule);
-  await server.register(citiesModule);
-  await server.register(districtsModule);
-  await server.register(groupsModule);
-  await server.register(developersModule);
-  await server.register(complexesModule);
-  await server.register(buildingsModule);
-  await server.register(usersModule);
-  await server.register(salesModule);
-  await server.register(propertiesModule);
-  await server.register(pdfModule);
-  await server.register(macroModule, { prefix: '/macro' });
-  await server.register(leadsModule);
-
-  //graphQL
-  await server.register(graphqlPlugin);
+  //services
+  // await server.register(pdfModule);
+  await server.register(analyticsService);
+  await server.register(macroService, { prefix: '/macro' });
+  await server.register(leadsService);
+  await server.register(gptBotService);
 
   await server.ready();
 

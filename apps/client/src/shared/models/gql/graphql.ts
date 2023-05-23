@@ -73,6 +73,16 @@ export type BuildingInput = {
   wallMaterial?: InputMaybe<WallMaterial>;
 };
 
+export type BuildingWithoutSales = {
+  __typename?: 'BuildingWithoutSales';
+  completionDate: Scalars['String'];
+  domClickId?: Maybe<Scalars['Int']>;
+  domRfId?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  tags: Array<PropertyType>;
+};
+
 export type City = {
   __typename?: 'City';
   id: Scalars['Int'];
@@ -122,7 +132,7 @@ export type DecorType = 'FINISHING' | 'FULL' | 'OPTIONALLY' | 'UNDER_FINISHING' 
 export type Developer = {
   __typename?: 'Developer';
   actualAddress?: Maybe<Scalars['String']>;
-  buildigs: Array<Building>;
+  buildings: Array<Building>;
   email?: Maybe<Scalars['String']>;
   fullName: Scalars['String'];
   group: Group;
@@ -403,6 +413,7 @@ export type Query = {
   building?: Maybe<Building>;
   buildings: Array<Building>;
   buildingsForMap: Array<BuildingForMap>;
+  buildingsWithoutSales: Array<BuildingWithoutSales>;
   cities: Array<City>;
   city?: Maybe<City>;
   complex?: Maybe<Complex>;
@@ -437,6 +448,10 @@ export type QueryBuildingsArgs = {
   complexId?: InputMaybe<Scalars['Int']>;
   districtId?: InputMaybe<Scalars['Int']>;
   groupId?: InputMaybe<Scalars['Int']>;
+};
+
+export type QueryBuildingsWithoutSalesArgs = {
+  date: Scalars['String'];
 };
 
 export type QueryCitiesArgs = {

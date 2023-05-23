@@ -1,8 +1,13 @@
 import { useQuery } from '@apollo/client';
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import BuildingsMap from '~/features/BuildingsMap';
+
+import useBuildings from '~/entities/Building/api/useBuildings';
 import PropertyTabs from '~/entities/Property/components/PropertyTabs';
+import BuildingsMap from '~/features/BuildingsMap';
+import BuildingInputDialog from '~/features/dialogs/BuildingInputDialog';
+import { AppColors, PropertyTypes } from '~/shared/constants/enums';
+import { BUILDING_WITH_DATA } from '~/shared/gql-docs/buildings';
 import { Building } from '~/shared/models/gql/graphql';
 import { useAuthStore } from '~/shared/store/useAuthStore';
 import { useSelectorStore } from '~/shared/store/useSelectorStore';
@@ -10,17 +15,13 @@ import BackdropLoading from '~/shared/ui/BackdropLoading';
 import ColumnWrapper from '~/shared/ui/ColumnWrapper';
 import ToolbarWrapper from '~/shared/ui/ToolbarWrapper';
 import BuildingPropertiesMap from '~/widgets/BuildingPropertiesMap';
+import BuildingView from '~/widgets/BuildingView';
 import SalesChart from '~/widgets/SalesChart';
 import { getChartData } from '~/widgets/SalesChart/getChartData';
-import { AppColors, PropertyTypes } from '../shared/constants/enums';
-import { BUILDING_WITH_DATA } from '~/shared/gql-docs/buildings';
-import BuildingInputDialog from '~/features/dialogs/BuildingInputDialog';
-import useBuildings from '~/entities/Building/api/useBuildings';
-import BuildingView from '~/widgets/BuildingView';
 
 export default function BuildingPage() {
   const user = useAuthStore((store) => store.user);
-  const permission = user?.role === 'ADMIN' || user?.role === 'EDITOR' ? true : false;
+  const permission = user?.role === 'ADMIN' || user?.role === 'EDITOR';
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, loading } = useQuery(BUILDING_WITH_DATA, {
@@ -91,7 +92,14 @@ export default function BuildingPage() {
       <BuildingInputDialog
         open={Boolean(building)}
         onClose={() => setBuilding(null)}
-        building={building}
+        building={
+          building
+            ? {
+                ...building,
+                completionDate: building.completionDate ? new Date(building.completionDate) : null,
+              }
+            : null
+        }
         permission={permission}
         onDelete={(id) => remove({ variables: { id } })}
         onSave={(input) =>

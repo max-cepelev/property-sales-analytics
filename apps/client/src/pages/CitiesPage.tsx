@@ -1,19 +1,20 @@
+import { mdiPlus } from '@mdi/js';
+import { Icon } from '@mdi/react';
 import { IconButton, Typography } from '@mui/material';
 import { useState } from 'react';
 
+import RegionsSelector from '~/entities/Region/components/RegionsSelector';
+import CityEditDialog from '~/features/dialogs/CityEditDialog';
+import DataGrid from '~/shared/components/DataGrid';
+import { CityInput } from '~/shared/models/gql/graphql';
+import { useAuthStore } from '~/shared/store/useAuthStore';
+import { useSelectorStore } from '~/shared/store/useSelectorStore';
+import { StyledTableContainer, TableToolbar } from '~/shared/ui/StyledTableComponents';
+
+import useCitiesService from '../entities/City/api/useCitiesService';
 import BackdropLoading from '../shared/ui/BackdropLoading';
 import ColumnWrapper from '../shared/ui/ColumnWrapper';
-import { StyledTableContainer, TableToolbar } from '../shared/ui/StyledTableComponents';
 import ToolbarButtonsWrapper from '../shared/ui/ToolbarButtonsWrapper';
-import useCitiesService from '../entities/City/api/useCitiesService';
-import { CityInput } from '~/shared/models/gql/graphql';
-import RegionsSelector from '~/entities/Region/components/RegionsSelector';
-import DataGrid from '~/shared/components/DataGrid';
-import CityEditDialog from '~/features/dialogs/CityEditDialog';
-import { useSelectorStore } from '~/shared/store/useSelectorStore';
-import { useAuthStore } from '~/shared/store/useAuthStore';
-import { Icon } from '@mdi/react';
-import { mdiPlus } from '@mdi/js';
 
 type GridRow = { id: number; name: string; region: string; regionId: number };
 

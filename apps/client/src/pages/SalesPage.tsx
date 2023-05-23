@@ -1,25 +1,24 @@
-import { useCallback, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { SaleRow } from '~/entities/Sale/models/Sale';
-import { dataToRows, rowsToData } from '~/entities/Sale/components/SalesGrid/setGridData';
+import { mdiContentSave } from '@mdi/js';
+import { Icon } from '@mdi/react';
+import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import PropTypeTabs from '~/entities/Property/components/PropTypeTabs';
 import SalesGrid from '~/entities/Sale/components/SalesGrid';
-
-import { Box, Button, Tooltip } from '~/shared/lib/MUI';
-import ColumnWrapper from '~/shared/ui/ColumnWrapper';
-import BackdropLoading from '~/shared/ui/BackdropLoading';
-import { StyledTableContainer, TableToolbar } from '~/shared/ui/StyledTableComponents';
-import ToolbarButtonsWrapper from '~/shared/ui/ToolbarButtonsWrapper';
-import useNotification from '~/shared/hooks/useNotification';
-
-import BuildingSelectorDialog from '~/widgets/BuildingSelectDialog';
-import { useSelectorStore } from '~/shared/store/useSelectorStore';
-import { useAuthStore } from '~/shared/store/useAuthStore';
+import { dataToRows, rowsToData } from '~/entities/Sale/components/SalesGrid/setGridData';
+import { SaleRow } from '~/entities/Sale/models/Sale';
 import { BUILDING_WITH_SALES } from '~/shared/gql-docs/buildings';
 import { SAVE_SALES } from '~/shared/gql-docs/sales';
-import { Icon } from '@mdi/react';
-import { mdiContentSave } from '@mdi/js';
-import { Link } from 'react-router-dom';
+import useNotification from '~/shared/hooks/useNotification';
+import { Box, Button, Tooltip } from '~/shared/lib/MUI';
+import { useAuthStore } from '~/shared/store/useAuthStore';
+import { useSelectorStore } from '~/shared/store/useSelectorStore';
+import BackdropLoading from '~/shared/ui/BackdropLoading';
+import ColumnWrapper from '~/shared/ui/ColumnWrapper';
+import { StyledTableContainer, TableToolbar } from '~/shared/ui/StyledTableComponents';
+import ToolbarButtonsWrapper from '~/shared/ui/ToolbarButtonsWrapper';
+import BuildingSelectorDialog from '~/widgets/BuildingSelectDialog';
 
 export default function SalesPage() {
   const permission = useAuthStore((store) => store.permission);

@@ -1,23 +1,23 @@
-import { IconButton, Typography } from '~/shared/lib/MUI';
+import { mdiPlus } from '@mdi/js';
+import { Icon } from '@mdi/react';
 import { useState } from 'react';
 
+import CitySelector from '~/entities/City/components/CitySelector';
+import useDistrictsService from '~/entities/District/api/useDistrictsService';
+import { DistrictDto } from '~/entities/District/models/District';
 import DistrictEditDialog from '~/features/dialogs/DistrictEditDialog';
+import DataGrid from '~/shared/components/DataGrid';
+import { IconButton, Typography } from '~/shared/lib/MUI';
+import { useAuthStore } from '~/shared/store/useAuthStore';
+import { useSelectorStore } from '~/shared/store/useSelectorStore';
 import BackdropLoading from '~/shared/ui/BackdropLoading';
 import ColumnWrapper from '~/shared/ui/ColumnWrapper';
 import { StyledTableContainer, TableToolbar } from '~/shared/ui/StyledTableComponents';
 import ToolbarButtonsWrapper from '~/shared/ui/ToolbarButtonsWrapper';
-import useDistrictsService from '~/entities/District/api/useDistrictsService';
-import { useSelectorStore } from '~/shared/store/useSelectorStore';
-import CitySelector from '~/entities/City/components/CitySelector';
-import DataGrid from '~/shared/components/DataGrid';
-import { useAuthStore } from '~/shared/store/useAuthStore';
-import { Icon } from '@mdi/react';
-import { mdiPlus } from '@mdi/js';
-import { DistrictDto } from '~/entities/District/models/District';
 
 export default function DistrictsPage() {
   const user = useAuthStore((store) => store.user);
-  const permission = user?.role === 'ADMIN' || user?.role === 'EDITOR' ? true : false;
+  const permission = user?.role === 'ADMIN' || user?.role === 'EDITOR';
   const [state, setState] = useState<DistrictDto | null>(null);
   const cityId = useSelectorStore((store) => store.cityId);
   const setCityId = useSelectorStore((store) => store.setCityId);

@@ -11,6 +11,8 @@ declare module 'fastify' {
       COOKIES_SECRET: string;
       JWT_SECRET: string;
       IS_PROD: boolean;
+      TELEGRAM_BOT: string;
+      OPENAI_KEY: string;
     };
   }
 }
@@ -24,7 +26,14 @@ export const configPlugin = fastifyPlugin(function (
   const path = join(process.cwd(), env ? `${env}.env` : 'development.env');
   const schema = {
     type: 'object',
-    required: ['PORT', 'DB_URL', 'COOKIES_SECRET', 'JWT_SECRET'],
+    required: [
+      'PORT',
+      'DB_URL',
+      'COOKIES_SECRET',
+      'JWT_SECRET',
+      'TELEGRAM_BOT',
+      'OPENAI_KEY',
+    ],
     properties: {
       PORT: {
         type: 'number',
@@ -37,6 +46,12 @@ export const configPlugin = fastifyPlugin(function (
         type: 'string',
       },
       JWT_SECRET: {
+        type: 'string',
+      },
+      TELEGRAM_BOT: {
+        type: 'string',
+      },
+      OPENAI_KEY: {
         type: 'string',
       },
       IS_PROD: {

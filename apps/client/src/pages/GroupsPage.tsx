@@ -1,14 +1,15 @@
+import { mdiPlus } from '@mdi/js';
+import { Icon } from '@mdi/react';
 import { useState } from 'react';
-import { IconButton, Typography } from '~/shared/lib/MUI';
+
+import useGroupsService from '~/entities/Group/api/useGroupsService';
 import GroupEditDialog from '~/entities/Group/components/GroupEditDialog';
+import DataGrid from '~/shared/components/DataGrid';
+import { IconButton, Typography } from '~/shared/lib/MUI';
+import { Group } from '~/shared/models/gql/graphql';
+import { useAuthStore } from '~/shared/store/useAuthStore';
 import ColumnWrapper from '~/shared/ui/ColumnWrapper';
 import { StyledTableContainer, TableToolbar } from '~/shared/ui/StyledTableComponents';
-import useGroupsService from '~/entities/Group/api/useGroupsService';
-import { Group } from '~/shared/models/gql/graphql';
-import DataGrid from '~/shared/components/DataGrid';
-import { useAuthStore } from '~/shared/store/useAuthStore';
-import { Icon } from '@mdi/react';
-import { mdiPlus } from '@mdi/js';
 
 export default function GroupsPage() {
   const permission = useAuthStore((store) => store.permission);

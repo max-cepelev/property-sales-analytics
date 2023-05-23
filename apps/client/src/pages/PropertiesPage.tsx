@@ -1,26 +1,24 @@
+import { useMutation, useQuery } from '@apollo/client';
+import { mdiContentSave } from '@mdi/js';
+import { Icon } from '@mdi/react';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation, useQuery } from '@apollo/client';
-import { Icon } from '@mdi/react';
-import { mdiContentSave } from '@mdi/js';
 
-import { PropertyRow } from '~/entities/Property/models/Property';
 import PropertiesGrid from '~/entities/Property/components/PropertiesGrid';
 import PropTypeTabs from '~/entities/Property/components/PropTypeTabs';
-
-import BackdropLoading from '~/shared/ui/BackdropLoading';
-import ColumnWrapper from '~/shared/ui/ColumnWrapper';
-import ToolbarButtonsWrapper from '~/shared/ui/ToolbarButtonsWrapper';
-import { StyledTableContainer, TableToolbar } from '~/shared/ui/StyledTableComponents';
-import { Box, Button, Tooltip } from '~/shared/lib/MUI';
-import { floatToString, intToString, stringToFloat, stringToInt } from '~/shared/utils/helpers';
+import { PropertyRow } from '~/entities/Property/models/Property';
+import { BUILDING_WITH_PROPERTIES } from '~/shared/gql-docs/buildings';
+import { SAVE_ALL_PROPERTIES } from '~/shared/gql-docs/properties';
 import useNotification from '~/shared/hooks/useNotification';
-import { useSelectorStore } from '~/shared/store/useSelectorStore';
+import { Box, Button, Tooltip } from '~/shared/lib/MUI';
 import { PropertyInput } from '~/shared/models/gql/graphql';
 import { useAuthStore } from '~/shared/store/useAuthStore';
-import { SAVE_ALL_PROPERTIES } from '~/shared/gql-docs/properties';
-import { BUILDING_WITH_PROPERTIES } from '~/shared/gql-docs/buildings';
-
+import { useSelectorStore } from '~/shared/store/useSelectorStore';
+import BackdropLoading from '~/shared/ui/BackdropLoading';
+import ColumnWrapper from '~/shared/ui/ColumnWrapper';
+import { StyledTableContainer, TableToolbar } from '~/shared/ui/StyledTableComponents';
+import ToolbarButtonsWrapper from '~/shared/ui/ToolbarButtonsWrapper';
+import { floatToString, intToString, stringToFloat, stringToInt } from '~/shared/utils/helpers';
 import BuildingSelectorDialog from '~/widgets/BuildingSelectDialog';
 
 export default function PropertiesPage() {

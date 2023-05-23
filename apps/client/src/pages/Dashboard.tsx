@@ -2,28 +2,23 @@ import { useQuery } from '@apollo/client';
 import { Button, Skeleton, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  AppColors,
-  PropertyClass,
-  PropertyClasses,
-  PropertyTypes,
-} from '../shared/constants/enums';
 
+import DistrictSelector from '~/entities/District/components/DistrictSelector';
+import PropertyTabs from '~/entities/Property/components/PropertyTabs';
+import InfoPanel from '~/features/InfoPanel';
+import PropertyTypeSelector from '~/shared/components/selectors/PropertyTypeSelector';
+import Selector from '~/shared/components/selectors/Selector';
+import { AppColors, PropertyClass, PropertyClasses, PropertyTypes } from '~/shared/constants/enums';
+import { SALES_ANALYTICS } from '~/shared/gql-docs/sales';
+import { useSelectorStore } from '~/shared/store/useSelectorStore';
 import BackdropLoading from '~/shared/ui/BackdropLoading';
 import ColumnWrapper from '~/shared/ui/ColumnWrapper';
 import RowWrapper from '~/shared/ui/RowWrapper';
 import ToolbarWrapper from '~/shared/ui/ToolbarWrapper';
-import { useSelectorStore } from '~/shared/store/useSelectorStore';
-import Selector from '~/shared/components/selectors/Selector';
-import DistrictSelector from '~/entities/District/components/DistrictSelector';
-import PropertyTypeSelector from '~/shared/components/selectors/PropertyTypeSelector';
 import AnalyticsCards from '~/widgets/AnalyticsCards';
-import PropertyTabs from '~/entities/Property/components/PropertyTabs';
 import SalesChart from '~/widgets/SalesChart';
-import InfoPanel from '~/features/InfoPanel';
 import { getChartData } from '~/widgets/SalesChart/getChartData';
 import SalesThree from '~/widgets/SalesThree';
-import { SALES_ANALYTICS } from '~/shared/gql-docs/sales';
 
 export default function Dashboard() {
   const districtId = useSelectorStore((store) => store.districtId);

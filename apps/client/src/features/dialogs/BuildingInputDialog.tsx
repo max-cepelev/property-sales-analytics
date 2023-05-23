@@ -1,35 +1,37 @@
-import { useState, useEffect } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { mdiClose } from '@mdi/js';
+import { Icon } from '@mdi/react';
+import { IconButton, InputAdornment, Tooltip } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
 import {
   BuildingInputSchema,
   buildingInputSchema,
 } from '~/entities/Building/schema/buildingInputSchema';
+import CitySelector from '~/entities/City/components/CitySelector';
+import DistrictSelector from '~/entities/District/components/DistrictSelector';
 import ConfirmModal from '~/shared/components/dialogs/ConfirmModal';
+import DateSelector from '~/shared/components/selectors/DateSelector';
+import LocationSelector from '~/shared/components/selectors/LocationSelector';
+import Selector from '~/shared/components/selectors/Selector';
+import { DecorTypes, PropertyClasses, WallMaterials } from '~/shared/constants/enums';
 import {
   Box,
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControlLabel,
   styled,
   TextField,
-  Checkbox,
-  FormControlLabel,
 } from '~/shared/lib/MUI';
-import DateSelector from '~/shared/components/selectors/DateSelector';
-import { DecorTypes, PropertyClasses, WallMaterials } from '~/shared/constants/enums';
-import CitySelector from '~/entities/City/components/CitySelector';
-import DistrictSelector from '~/entities/District/components/DistrictSelector';
-import LocationSelector from '~/shared/components/selectors/LocationSelector';
-import Selector from '~/shared/components/selectors/Selector';
-import { IconButton, InputAdornment, Tooltip } from '@mui/material';
-import { Icon } from '@mdi/react';
-import { mdiClose } from '@mdi/js';
-import GroupAutocompleteSelector from '../selectors/GroupAutocompleteSelector';
-import DeveloperAutocompleteSelector from '../selectors/DeveloperAutocompleteSelector';
+
 import ComplexAutocompleteSelector from '../selectors/ComplexAutocompleteSelector';
+import DeveloperAutocompleteSelector from '../selectors/DeveloperAutocompleteSelector';
+import GroupAutocompleteSelector from '../selectors/GroupAutocompleteSelector';
 
 const DialogWrapper = styled('div')(() => ({
   display: 'grid',
@@ -171,7 +173,7 @@ export default function BuildingInputDialog({
                   value={value || null}
                   error={fieldState.invalid}
                   // helperText={fieldState.error?.message}
-                  onChange={(e) => onChange(e)}
+                  onChange={onChange}
                 />
               )}
             />

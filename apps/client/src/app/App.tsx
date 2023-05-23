@@ -1,16 +1,16 @@
-import { Outlet } from 'react-router-dom';
-
 import './styles/grid.css';
 
-import { Menu } from '~/widgets/Menu';
-import { useSelectorStore } from '~/shared/store/useSelectorStore';
-import Toolbar from '~/widgets/Toolbar';
+import { Suspense, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+
 import Drawer from '~/features/Drawer';
 import useAuthService from '~/shared/hooks/useAuthService';
-import Loading from '~/shared/ui/Loading';
-import { Suspense, useEffect } from 'react';
 import { useAuthStore } from '~/shared/store/useAuthStore';
+import { useSelectorStore } from '~/shared/store/useSelectorStore';
 import BackdropLoading from '~/shared/ui/BackdropLoading';
+import Loading from '~/shared/ui/Loading';
+import { Menu } from '~/widgets/Menu';
+import Toolbar from '~/widgets/Toolbar';
 
 function App() {
   const { check, loading } = useAuthService();

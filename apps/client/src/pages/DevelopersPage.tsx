@@ -1,20 +1,20 @@
-import { IconButton, Link, Typography } from '~/shared/lib/MUI';
+import { mdiPlus } from '@mdi/js';
+import { Icon } from '@mdi/react';
 import { useState } from 'react';
+
+import useDevelopersService from '~/entities/Developer/api/useDevelopersService';
+import { DeveloperInput } from '~/entities/Developer/schema/developerInputSchema';
 import DeveloperEditDialog from '~/features/dialogs/DeveloperEditDialog';
+import GroupAutocompleteSelector from '~/features/selectors/GroupAutocompleteSelector';
+import DataGrid, { GridColumn } from '~/shared/components/DataGrid';
+import { IconButton, Link, Typography } from '~/shared/lib/MUI';
+import { Developer } from '~/shared/models/gql/graphql';
+import { useAuthStore } from '~/shared/store/useAuthStore';
+import { useSelectorStore } from '~/shared/store/useSelectorStore';
 import BackdropLoading from '~/shared/ui/BackdropLoading';
 import ColumnWrapper from '~/shared/ui/ColumnWrapper';
 import { StyledTableContainer, TableToolbar } from '~/shared/ui/StyledTableComponents';
 import ToolbarButtonsWrapper from '~/shared/ui/ToolbarButtonsWrapper';
-import useDevelopersService from '~/entities/Developer/api/useDevelopersService';
-
-import { Developer } from '~/shared/models/gql/graphql';
-import { useSelectorStore } from '~/shared/store/useSelectorStore';
-import DataGrid, { GridColumn } from '~/shared/components/DataGrid';
-import { useAuthStore } from '~/shared/store/useAuthStore';
-import { DeveloperInput } from '~/entities/Developer/schema/developerInputSchema';
-import { Icon } from '@mdi/react';
-import { mdiPlus } from '@mdi/js';
-import GroupAutocompleteSelector from '~/features/selectors/GroupAutocompleteSelector';
 
 export default function DevelopersPage() {
   const permission = useAuthStore((store) => store.permission);

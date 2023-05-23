@@ -1,3 +1,7 @@
+import { mdiStar, mdiStarOutline } from '@mdi/js';
+import { Icon } from '@mdi/react';
+
+import { SalesAggregate } from '~/entities/Sale/models/Sale';
 import { AppColors, PropertyType, PropertyTypes } from '~/shared/constants/enums';
 import {
   Box,
@@ -8,12 +12,10 @@ import {
   Tooltip,
   Typography,
 } from '~/shared/lib/MUI';
-import { useSelectorStore } from '~/shared/store/useSelectorStore';
-import TooltipContent from './TooltipContent';
-import { Icon } from '@mdi/react';
-import { mdiStar, mdiStarOutline } from '@mdi/js';
 import { SalesDataByBuilding } from '~/shared/models/gql/graphql';
-import { SalesAggregate } from '~/entities/Sale/models/Sale';
+import { useSelectorStore } from '~/shared/store/useSelectorStore';
+
+import TooltipContent from './TooltipContent';
 interface Props {
   buildings: SalesDataByBuilding[];
   dataType: keyof SalesAggregate;
@@ -36,7 +38,7 @@ export default function BuildingList({
   return (
     <List component='div' disablePadding sx={{ width: '100%' }}>
       {[...buildings]
-        .sort((a, b) => b.sales.number - a.sales.number)
+        .sort((a, b) => b.sales[dataType] - a.sales[dataType])
         .map((building, _, buildings) => (
           <Tooltip
             key={building.id}

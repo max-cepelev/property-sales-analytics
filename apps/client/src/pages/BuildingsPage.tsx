@@ -1,9 +1,11 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import useBuildings from '~/entities/Building/api/useBuildings';
 import BuildingInputDialog from '~/features/dialogs/BuildingInputDialog';
 import DataGrid, { GridColumn } from '~/shared/components/DataGrid';
 import Pagination from '~/shared/components/Pagination';
+import { DecorTypes, PropertyClasses, WallMaterials } from '~/shared/constants/enums';
 import { PickFrom } from '~/shared/models/Common';
 import { Building } from '~/shared/models/gql/graphql';
 import { useAuthStore } from '~/shared/store/useAuthStore';
@@ -12,7 +14,6 @@ import BackdropLoading from '~/shared/ui/BackdropLoading';
 import ColumnWrapper from '~/shared/ui/ColumnWrapper';
 import { StyledTableContainer } from '~/shared/ui/StyledTableComponents';
 import { getQuarter } from '~/shared/utils/getQuarter';
-import { DecorTypes, PropertyClasses, WallMaterials } from '../shared/constants/enums';
 import BuildingsTableToolbar from '~/widgets/BuildigsTableToolbar';
 
 interface GridData
